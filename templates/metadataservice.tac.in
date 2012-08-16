@@ -42,7 +42,7 @@ class MetadataService(cyclone.web.Application):
             "task_queue": TASK_QUEUE,
         }
 
-        cyclone.web.Application.__init__(self, handlers, **settings)
+        cyclone.web.Application.__init__(self, handlers, debug=True, **settings)
 
 logfile = DailyLogFile("metadataservice.log", "${buildout:log-directory}")
 application = service.Application("MetadataService")
