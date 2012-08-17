@@ -17,6 +17,8 @@ class MetadataServiceTest(unittest.TestCase):
         response = service.post(doc=pdf64, filename='test.pdf')
         resource = response.resource()
         resource.doc_key |should_not| equal_to(None)
+        response = service.get(key=resource.doc_key).resource()
+        response.done |should| equal_to(False)
 
 if __name__ == '__main__':
     metadataservice_ctl = join(FOLDER_PATH, '..', 'bin', 'metadataservice_ctl')
