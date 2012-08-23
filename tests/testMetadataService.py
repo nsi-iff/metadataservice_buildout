@@ -10,6 +10,7 @@ from should_dsl import *
 
 FOLDER_PATH = abspath(dirname(__file__))
 class MetadataServiceTest(unittest.TestCase):
+
     def test_extraction(self):
         pdf = open(join(FOLDER_PATH, 'teste.pdf')).read()
         pdf64 = b64encode(pdf)
@@ -18,7 +19,11 @@ class MetadataServiceTest(unittest.TestCase):
         resource = response.resource()
         resource.doc_key |should_not| equal_to(None)
         response = service.get(key=resource.doc_key).resource()
-        response.done |should| equal_to(False)
+        sleep(5)
+        response.done |should| equal_to(True)
+
+        metadata_key = service.get(key=resource.doc_key, metadata=True).resource().metadata_key
+        metadata_key |should_not| equal_to(None)
 
 if __name__ == '__main__':
     metadataservice_ctl = join(FOLDER_PATH, '..', 'bin', 'metadataservice_ctl')
