@@ -18,8 +18,8 @@ class MetadataServiceTest(unittest.TestCase):
         response = service.post(doc=pdf64, filename='test.pdf')
         resource = response.resource()
         resource.doc_key |should_not| equal_to(None)
-        response = service.get(key=resource.doc_key).resource()
         sleep(5)
+        response = service.get(key=resource.doc_key).resource()
         response.done |should| equal_to(True)
 
         metadata_key = service.get(key=resource.doc_key, metadata=True).resource().metadata_key
